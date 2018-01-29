@@ -2,7 +2,7 @@
 
 A deployed app to help the user find new friends.
 
-Deployed on Heroku: https://whispering-woodland-24704.herokuapp.com/
+Deployed on Heroku: https://fast-fjord-57108.herokuapp.com/
 
 
 ## Prerequisites
