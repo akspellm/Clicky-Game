@@ -1,29 +1,52 @@
 import React, { Component } from "react";
-import FriendCard from "./components/FriendCard";
+import lodash from "lodash";
+import GameCard from "./components/GameCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
-import friends from "./friends.json";
+import cards from "./cats.json";
 import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      gameOver: false,
+      score: 0
+    };
+  };
 
-  state = {
-    friends
+  changeScore() {
+    this.setState({ score: this.state.score + 1 });
+    console.log(this.state.score);
+  };
+
+  changeStatus() {
+    this.setState({ gameOver: true });
+    console.log("Game Over");
+    this.playGame();
+  };
+
+  playGame() {
+    if (this.state.gameOver === true) {
+      this.setState({
+        gameOver: false,
+        score: 0
+      });
+    };
   };
 
   render() {
     return (
       <Wrapper>
-        <Title>Friends List</Title>
-        {this.state.friends.map(friend => (
+        <Title score={this.state.score}></Title>
+        {lodash.shuffle(cards).map(card => (
           <GameCard
-            removeFriend={this.removeFriend}
-            id={friend.id}
-            key={friend.id}
-            name={friend.name}
-            image={friend.image}
-            occupation={friend.occupation}
-            location={friend.location}
+            id={card.id}
+            key={card.id}
+            image={card.image}
+            changeStatus={this.changeStatus.bind(this)}
+            changeScore={this.changeScore.bind(this)}
+            playGame={this.playGame}
           />
         ))}
       </Wrapper>
